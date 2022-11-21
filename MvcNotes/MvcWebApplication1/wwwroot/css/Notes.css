@@ -1,0 +1,10 @@
+﻿.notes-conteiner
+{
+    display: flex;
+    flex-direction: column;
+
+}
+#list 
+{
+    list-style : none;
+}
