@@ -20,9 +20,9 @@ namespace MvcWebApplication1.Controllers
         }
         //get from server 
         //post to server 
-        //https://localhost:7224/Notes/AddNotes?title=hello&description=ophfrfgrf
+        //https://localhost:7224/Notes/AddNotes?title=hello&description=ophfrfgrf&tags=#dedede
         [HttpPost]
-        public IActionResult Add(string title, string description)
+        public IActionResult Add(string title, string description, string tags)
         {
             if (string.IsNullOrWhiteSpace(description))
             {
@@ -32,7 +32,8 @@ namespace MvcWebApplication1.Controllers
             {
                 Title = title,
                 Description = description,
-                DateTime = DateTime.Now
+                DateTime = DateTime.Now,
+                Tags = tags
             });
             _writer.Write(_notesList);
             Console.WriteLine($"{title}${description}");
@@ -44,7 +45,7 @@ namespace MvcWebApplication1.Controllers
         {
             //_notesList.GetItems();
             var f = _writer.Read();
-            return  Ok(f);
+            return Ok(f);
         }
         public IActionResult Edit(string title, string name, int index)
         {

@@ -1,10 +1,22 @@
-﻿.notes-conteiner
+﻿* 
+{
+   font-family :Tahoma ;
+}
+.notes-conteiner
 {
     display: flex;
     flex-direction: column;
-
+   background: none;
 }
 #list 
 {
+    margin-top: 1rem;
     list-style : none;
+    border: 1px  solid red;
+
+}
+.list-item 
+{
+    background: yellow;
+    margin : 10px;
 }

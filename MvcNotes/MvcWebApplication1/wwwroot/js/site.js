@@ -11,8 +11,9 @@ $(function () {
     $adding.on("click", (e) => {
         let $title = $("#title").val().toString();
         let $description = $("#description").val().toString();
+        let $tags = $("#tag").val().toString();
 
-        $.post(`/Notes/Add?title=${$title}&description=${$description}`, { title: $title, description: $description },
+        $.post(`/Notes/Add?title=${$title}&description=${$description}&tags=${$tags}`, { title: $title, description: $description, tags: $tags },
             data => {
                 console.log($title);
                 console.log($description);
@@ -24,23 +25,43 @@ $(function () {
 
         $.get(`/Notes/GetResult`, data => {
             //console.log(data);
-
             //console.log(object);
             for (const element in data) {
                 let objElement = data[element];
                 console.log(objElement);
-                $listofNotes.append(`<li>
+                $listofNotes.append(`<li class="list-item" >
             <div>${objElement.title}</div>
 <div>${objElement.description}</div>
 <div>${objElement.dateTime}</div>
 <div>${objElement.tags}</div>
+<input  class="edit" type="button"  value="edit"/> 
                         </li>`)
             }
-
-
         });
 
     })
- 
+    $listofNotes.on("click", (e) => {
+        let $target = $(e.target);
+        let buttonDetails = $target.attr("edit");
+        if ($target.hasClass("edit")) {
+            {
+                let $title = $target.prev().prev().prev().prev();
+                let $description = $target.prev().prev().prev();
+                let $time = $target.prev().prev();
+                let $tags = $target.prev();
+
+                console.log($description.text());
+                
+                //let modelView = $(".sub-model-content");
+                //$modal.css("display", "block");
+
+                //$.get(`http://www.omdbapi.com/?i=tt3896198&apikey=31ed7c20&t=${b.text()}`).done((data) => {
+                //    response2 = data;
+                //    addModelSource(modelView, response2);
+                //});
+
+            }
+        }
+    })
 
 });
