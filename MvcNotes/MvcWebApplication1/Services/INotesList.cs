@@ -14,6 +14,7 @@ namespace MvcWebApplication1.Services
 		public void AddItem(Note item)
 		{
 			_items.Add(item);
+			item.Id++;
 		}
 
 		public IEnumerable<Note> GetItems()

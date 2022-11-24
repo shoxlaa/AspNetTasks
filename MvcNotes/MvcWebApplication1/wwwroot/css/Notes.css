@@ -1,22 +1,25 @@
-﻿* 
-{
-   font-family :Tahoma ;
+﻿* {
+    font-family: Tahoma;
 }
-.notes-conteiner
-{
-    display: flex;
-    flex-direction: column;
-   background: none;
-}
-#list 
-{
-    margin-top: 1rem;
-    list-style : none;
-    border: 1px  solid red;
 
+.notes-conteiner {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    background: none;
 }
-.list-item 
-{
-    background: yellow;
-    margin : 10px;
+
+#list {
+    margin-top: 1rem;
+    list-style: none;
+    border: 1px solid red;
+}
+
+.list-item {
+    background: #fdfe7f;
+    margin: 10px;
 }
