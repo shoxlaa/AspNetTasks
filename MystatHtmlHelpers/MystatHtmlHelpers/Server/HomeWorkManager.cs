@@ -21,14 +21,14 @@ namespace MystatHtmlHelpers.Server
 				return null;
 			}
 
-			return await _dbContext.homeWorks.SingleOrDefaultAsync(p => p.Id == id);
+			return await _dbContext.HomeWorks.SingleOrDefaultAsync(p => p.Id == id);
 		}
 
 		public async Task<bool> AddHomeWorkAsync(HomeWork product)
 		{
 			try
 			{
-				await _dbContext.homeWorks.AddAsync(product);
+				await _dbContext.HomeWorks.AddAsync(product);
 				await _dbContext.SaveChangesAsync();
 
 				return true;
@@ -41,7 +41,7 @@ namespace MystatHtmlHelpers.Server
 
 		public IEnumerator<HomeWork> GetEnumerator()
 		{
-			foreach (var product in _dbContext.homeWorks)
+			foreach (var product in _dbContext.HomeWorks)
 			{
 				yield return product;
 			}
@@ -55,7 +55,7 @@ namespace MystatHtmlHelpers.Server
 
 				if (result != null)
 				{
-					_dbContext.homeWorks.Remove(result);
+					_dbContext.HomeWorks.Remove(result);
 
 					await _dbContext.SaveChangesAsync();
 

@@ -13,19 +13,19 @@ namespace MystatHtmlHelpers.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            return View( await _homeWorkManager.GetHomeWorkByIdAsync(20)) ;
+            return View( await _homeWorkManager.GetHomeWorkByIdAsync(1)) ;
         }
 
         [HttpPost]
         [HttpGet]
-        public async Task<IActionResult> Add([FromForm] HomeWork? hw)
+        public async Task<IActionResult> Add([FromBody] HomeWork? hw)
         {
             if (HttpContext.Request.Method == HttpMethod.Get.Method || hw == null)
             {
                 return View();
             }
 
-            /// await _homeWorkManager.AddHomeWorkAsync(hw);
+             await _homeWorkManager.AddHomeWorkAsync(hw);
 
             return RedirectToAction("Index");
         }
