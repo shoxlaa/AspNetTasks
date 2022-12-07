@@ -1,0 +1,17 @@
+﻿@using MyStatTagHelpers.Models
+@using MyStatTagHelpers.HtmlHelpers
+@*
+*@
+@model List<HomeWork>
+@{
+}
+@section Scripts
+    {
+    <script src="~/js/homework-remove.js"></script>
+    <link href="~/css/site.css" rel="stylesheet" />
+}
+
+<homework homework-list="Model"></homework>
+
+   @* @Html.RenderHomeWorks(Model);
+*@
