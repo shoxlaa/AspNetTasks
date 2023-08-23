@@ -1,0 +1,62 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+    // нажимая на кнопочку add автомотически должен
+    -произойти refresh и
+    - удалится значения из input
+    - при генерации странички автомотически должен вызваться ref
+    - и может начать изчать boodstrup
+    - изменить дизайн notes  поменять формат даты
+
+*@
+@{
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8">
+
+            <div class="list-group  my-list">
+                <div class="list-group-item   list-item-cont" aria-current="true">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1 list-item-title">Title </h5>
+                        <div>
+                            <small class="list-item-date">Date time </small>
+                            <div>
+                                <i class="bi bi-pen"></i>
+                                <i class="bi bi-trash3-fill"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="mb-1 list-item-description">Description .</p>
+                    <small class="list-title-tags"> TAgs.</small>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col">
+            <h1>Add ToDO</h1>
+
+            <div class="input-group mb-3 ">
+                <input type="text" class="form-control title-input" placeholder="Title" aria-label="Title" aria-describedby="basic-addon1" />
+            </div>
+            <div class="form-floating mb-3 ">
+                <textarea class="form-control description-input" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                <label for="floatingTextarea2">Description</label>
+            </div>
+
+            <div class="input-group mb-3">
+                <input type="text" class="form-control tags-input" placeholder="Tags" aria-label="Tags" aria-describedby="basic-addon1" />
+            </div>
+            <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-primary add-button ">Add</button>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+
