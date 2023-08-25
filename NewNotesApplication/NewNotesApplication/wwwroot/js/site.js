@@ -14,22 +14,30 @@ $(function () {
     let $refButtom = $(".ref-button");
 
     let $data = [];
+    let lastIndex =0;
 
     window.onload = () => {
         $.get(`/Notes/GetResult`, data => {
-            //console.log(data);
-            //console.log(object);
+            console.log(data);            
             $list.empty();
             showItems(data);
+           
 
             for (const element in data) {
                 let objElement = data[element];
                 $data.push(objElement);
             }
+
+            if ($data.length > 0) {
+                lastIndex = $data[$data.length - 1]['id'];
+            }
+
         });
 
-    }
+       
 
+    }
+   
 
     function showItems(data) {
         for (const element in data) {
@@ -37,7 +45,7 @@ $(function () {
 
             console.log(objElement);
             $list.append(`
-                    <div  class="list-group-item list-group-item-action  list-item-cont" aria-current="true">
+                    <div  attr=${objElement.id} class="list-group-item list-group-item-action  list-item-cont" aria-current="true">
                         <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1 list-item-title">${objElement.title}</h5>
                         <small class="list-item-date">${objElement.dateTime}</small> 
@@ -78,25 +86,64 @@ $(function () {
             $description = target.parent().prev();
             $title = $description.parent().prev().children()[0];
             $tags = target.parent().parent().next();
+            $id = target.parent().parent().parent().attr("attr");
+
             console.log($description.text());
             console.log($title.innerText);
             console.log($tags.text());
 
 
+
+            alert("enter new title");
+            let newTitle = prompt(" title:", $title.innerText);
+            $title.innerText = newTitle;
+
             alert("enter new description ");
             let newDes = prompt("description:", $description.text());
+            $description.text(newDes);
 
-            //alert("enter new title");
-            //let newTitle = prompt(" title:", $title.innerText);
+            alert("enter new tags", $tags.text());
+            let newTags = prompt("tags:", $tags.text());
 
-            //prompt("enter new tags", $tags.text());
-            //let newTags = prompt("tags:", $tags.text());
+            $tags.text(newTags);
 
-            $description.text(newDes); 
-            
+            console.log(target.parent().parent().parent().attr("attr"))
+
+            $.ajax({
+                url: `/Notes/Edit?id=${$id}&title=${$title.innerText}&description=${$description.text()}&tags=${$tags.text()}`, 
+                type: 'PUT',
+                succsess: function (data) {
+                    alert(data);
+                }
+            })
             
         }
 
+        if (target.hasClass("delete")) {
+
+            $id = target.parent().parent().parent().attr("attr");
+            target.parent().parent().parent().remove();
+
+           let x =  $data.find(x => x.id == $id); 
+
+            $data.splice($data.indexOf(x), 1);
+           
+            
+            console.log($data);
+
+            $.ajax({
+                url: `/Notes/Delete?id=${$id}`,
+                type: 'DELETE',
+                succsess: function (data) {
+                    alert(data);
+                }
+            })
+
+            //console.log($list.find(x => x.id = $id));
+
+           
+
+        }
 
     })
 
@@ -130,10 +177,14 @@ $(function () {
             });
 
 
-        $data.push({ title: titleString, dateTime: dateString, description: descriptionString, tags: tagsString })
+        $data.push({ id: ++lastIndex, title: titleString, dateTime: dateString, description: descriptionString, tags: tagsString })
         console.log($data);
         $list.empty();
         showItems($data);
+
+        $title.val("");
+        $description.val(""); 
+        $tags.val("");
 
         //for (const element in $data) {
         //    let objElement = $data[element];

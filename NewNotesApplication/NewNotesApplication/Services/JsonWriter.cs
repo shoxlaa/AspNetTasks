@@ -10,11 +10,11 @@ namespace NewNotesApplication.Services
         public INotesList _notesList;
         public JsonWriter(INotesList Object)
         {
-            Note value = new Note() { Id=1, Title="Title", Description="Description", Tags="Tags", DateTime="DateTime" };
+            Note value = new Note() { Id=1, Title="Title ", Description="Description this item is defalt value it will be removed dont write here any common info ", Tags="Tags", DateTime="DateTime" };
             NotesList notes = new();
-            notes.AddItem(value);
+            notes.Add(value);
 
-            jsonString =  JsonSerializer.Serialize<IEnumerable<Note>>(notes.GetItems());
+            jsonString =  JsonSerializer.Serialize<IEnumerable<Note>>(notes.Get());
             File.WriteAllText(_fileName, jsonString);
 
 
@@ -24,7 +24,7 @@ namespace NewNotesApplication.Services
         {
             //JsonSerializer.Serialize<INotesList>(_fileName, value);
 
-            jsonString = JsonSerializer.Serialize<IEnumerable<Note>>(value.GetItems());
+            jsonString = JsonSerializer.Serialize<IEnumerable<Note>>(value.Get());
              File.WriteAllText(_fileName,jsonString);  
         }
         public IEnumerable<Note> Read()
