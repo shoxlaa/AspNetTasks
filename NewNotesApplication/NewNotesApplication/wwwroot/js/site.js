@@ -69,8 +69,6 @@ $(function () {
                     </div>
                 
                 `)
-
-            /*  $data.push(objElement);*/
         }
 
     }
@@ -138,28 +136,11 @@ $(function () {
                     alert(data);
                 }
             })
-
-            //console.log($list.find(x => x.id = $id));
-
-           
-
         }
 
     })
 
-    // $title.on("click", ()=> {
 
-
-    // })
-    // $description.on("click", ()=> {
-
-
-    // })
-
-    // $tags.on("click", ()=> {
-
-
-    // })
     $addButton.on("click", () => {
 
         let titleString = $title.val().toString();
@@ -185,76 +166,11 @@ $(function () {
         $title.val("");
         $description.val(""); 
         $tags.val("");
-
-        //for (const element in $data) {
-        //    let objElement = $data[element];
-        //    console.log(objElement);
-        //    $list.append(`
-        //            <div  class="list-group-item list-group-item-action  list-item-cont" aria-current="true">
-        //                <div class="d-flex w-100 justify-content-between">
-        //                <h5 class="mb-1 list-item-title">${objElement.title}</h5>
-        //                <small class="list-item-date">${objElement.dateTime}</small>
-        //                </div>
-        //             <p class="mb-1 list-item-description">${objElement.description} .</p>
-        //             <small class="list-title-tags">${objElement.tags}.</small>
-        //            </div>
-
-        //        `)
-        //}        
+      
     })
 
-    //$refButtom.on("click", ()=>{
-    //    $.get(`/Notes/GetResult`, data => {
-    //        //console.log(data);
-    //        //console.log(object);
-    //        $list.empty();
-    //        for (const element in data)
-    //        {
-    //            let objElement = data[element];
-    //            console.log(objElement);
-    //            $list.append(`
-    //                <div  class="list-group-item list-group-item-action  list-item-cont" aria-current="true">
-    //                    <div class="d-flex w-100 justify-content-between">
-    //                    <h5 class="mb-1 list-item-title">${objElement.title}</h5>
-    //                    <small class="list-item-date">${objElement.dateTime}</small>
-    //                    </div>
-    //                 <p class="mb-1 list-item-description">${objElement.description} .</p>
-    //                 <small class="list-title-tags">${objElement.tags}.</small>
-    //                </div>
-
-    //            `)
-    //        }
-    //    });
-    //})
 
 
 
-    $lilContainer = $(".container1-1-1-1");
-
-    $lilContainer.on("click", (e) => {
-
-        console.log()
-        $target = $(e.target);
-       
-
-        $l3 = $(e.target).parent();
-
-        $ll2 = $l3.parent();
-        $lll1 = $ll2.parent();
-        
-
-
-
-        /*let buttonDetails = $target.attr("container1-1");*/
-        let v = $target;
-        /* console.log($lll1);*/
-        /* console.log($ll2); */
-        /*console.log($l3);*/
-
-        /* console.log(buttonDetails.text());*/
-
-
-
-    })
 
 })
