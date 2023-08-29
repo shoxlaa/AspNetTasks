@@ -1,7 +1,16 @@
+using CinemaApp.Models;
+using CinemaApp.Services;
+using CinemaApp.Services.DataBases.EFCore;
+using CinemaApp.Services.DataBases.Json;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddSingleton<IDataBase, JsonDataBase>();
+builder.Services.AddSingleton<IDataBase, EFCoreDataBase>();
+builder.Services.AddSingleton<JsonDbContext<Cinema>>();
+builder.Services.AddSingleton<JsonDbContext<Session>>();
 
 var app = builder.Build();
 
