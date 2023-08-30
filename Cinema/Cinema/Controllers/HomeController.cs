@@ -5,6 +5,12 @@ using System.Diagnostics;
 
 namespace CinemaApp.Controllers
 {
+
+    // админ панель  для удаления и создания фильма/сенаса
+
+    // следует создать страничку для добавления фильма 
+    // страничка для добавления сеанса 
+    // 
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -14,13 +20,11 @@ namespace CinemaApp.Controllers
         {
             _logger = logger;
             _dataBase = new JsonDataBase();
-            //_dataBase.Add(new Cinema { Id=2, Name="wwwhy", Description="the best u ever know", });
+
         }
 
         public IActionResult Index()
         {
-            var c = _dataBase.Get()[0];
-            Console.WriteLine(c);
             return View();
         }
 
