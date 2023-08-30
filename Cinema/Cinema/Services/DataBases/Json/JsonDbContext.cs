@@ -1,4 +1,5 @@
-﻿using JsonFlatFileDataStore;
+﻿using CinemaApp.Models;
+using JsonFlatFileDataStore;
 
 namespace CinemaApp.Services.DataBases.Json
 {
@@ -8,28 +9,23 @@ namespace CinemaApp.Services.DataBases.Json
 
 
 
-    public class JsonDbContext<T>
+
+
+    public class JsonDbContext
     {
         public string FileName { get; set; } = $"data.json";
         public DataStore dStore { get; set; }
-        public IDocumentCollection<T> collection { get; set; }
+
         public JsonDbContext()
         {
-            //if (File.Exists(FileName))
-            //{
-            //    File.Delete(FileName);
-            //}
-            dStore = new DataStore(FileName);
-        }
-        public JsonDbContext(string fileName)
-        {
-            //if (File.Exists(fileName))
-            //{
-            //    File.Delete(fileName);
-            //}
-            dStore = new DataStore(fileName);
+            dStore = new(FileName);
         }
 
+        public JsonDbContext(string fileName)
+        {
+            dStore = new(fileName);
+        }
     }
+
 
 }

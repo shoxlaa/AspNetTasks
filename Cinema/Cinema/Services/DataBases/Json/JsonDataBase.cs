@@ -1,33 +1,37 @@
 ﻿using CinemaApp.Models;
+using JsonFlatFileDataStore;
 using Microsoft.AspNetCore.Routing.Constraints;
 using System.Collections.Generic;
 
 namespace CinemaApp.Services.DataBases.Json
 {
-    public class JsonDataBase : IDataBase
+    public class JsonDataBase
     {
-        private readonly JsonDbContext<IModel> _cinemaDb;
-        private readonly JsonDbContext<IModel> _sessionDb;
+        private readonly JsonDbContext jsonDb;
 
+        private IDocumentCollection<Cinema> _cinemas;
+        private IDocumentCollection<Session> _sessions;
         public JsonDataBase()
         {
-            _cinemaDb = new JsonDbContext<IModel>("films.json");
-            _sessionDb = new JsonDbContext<IModel>("session.json");
-
-            _cinemaDb.collection = _cinemaDb.dStore.GetCollection<IModel>();
-            _sessionDb.collection = _sessionDb.dStore.GetCollection<IModel>();
-
+            jsonDb = new JsonDbContext();
+            _cinemas=  jsonDb.dStore.GetCollection<Cinema>();
+            _sessions = jsonDb.dStore.GetCollection<Session>();
         }
         public async Task<bool> Add(IModel model)
         {
+            if (model == null)
+            {
+                return false;
+            }
+
             if (model is Cinema)
             {
-                await _cinemaDb.collection.InsertOneAsync(model);
+                await _cinemas.InsertOneAsync(model as Cinema);
             }
 
             if (model is Session)
             {
-                await _sessionDb.collection.InsertOneAsync(model);
+                await _sessions.InsertOneAsync(model as Session);
                 return true;
             }
 
@@ -36,24 +40,37 @@ namespace CinemaApp.Services.DataBases.Json
 
         public List<IModel> Get()
         {
-            List<IModel> list = _cinemaDb.collection.AsQueryable().ToList();
+            var list = new List<IModel>(_cinemas.AsQueryable());
+            list.AddRange(_sessions.AsQueryable());
+            return list;
+        }
 
-            return  list ;
+        public List<Cinema> GetCinemas()
+        {
+            return new List<Cinema>((_cinemas.AsQueryable()));
+        }
+        public List<Session> GetSessions()
+        {
+            return new List<Session>((_sessions.AsQueryable()));
         }
 
         public async Task<bool> Remove(IModel model)
         {
+            if (model == null)
+            {
+                return false;
+            }
+
             if (model is Cinema)
             {
-                await _cinemaDb.collection.DeleteOneAsync(model);
+                await _cinemas.DeleteOneAsync(model.Id);
             }
 
             if (model is Session)
             {
-                await _sessionDb.collection.DeleteOneAsync(model);
+                await _sessions.DeleteOneAsync(model.Id);
                 return true;
             }
-
             return false;
         }
 
@@ -61,13 +78,13 @@ namespace CinemaApp.Services.DataBases.Json
         {
             if (model is Cinema)
             {
-                await _cinemaDb.collection.UpdateOneAsync(model.Id, model);
+                await _cinemas.UpdateOneAsync(model.Id, model);
                 return true;
             }
 
             if (model is Session)
             {
-                await _sessionDb.collection.UpdateOneAsync(model.Id, model);
+                await _sessions.UpdateOneAsync(model.Id, model);
                 return true;
             }
 
@@ -77,5 +94,6 @@ namespace CinemaApp.Services.DataBases.Json
 
 
     }
+
 
 }

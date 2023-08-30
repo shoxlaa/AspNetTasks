@@ -10,7 +10,4 @@ namespace CinemaApp.Services
         public List<IModel> Get();
     }
 
-
-
-
 }
