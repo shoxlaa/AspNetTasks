@@ -9,8 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<IDataBase, JsonDataBase>();
 builder.Services.AddSingleton<IDataBase, EFCoreDataBase>();
-builder.Services.AddSingleton<JsonDbContext<Cinema>>();
-builder.Services.AddSingleton<JsonDbContext<Session>>();
+builder.Services.AddSingleton<JsonDbContext>();
+builder.Services.AddSingleton<JsonDbContext>();
 
 var app = builder.Build();
 

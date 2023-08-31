@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace CinemaApp.Services.DataBases.Json
 {
-    public class JsonDataBase
+    public class JsonDataBase :IDataBase
     {
         private readonly JsonDbContext jsonDb;
 
